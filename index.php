@@ -2,13 +2,13 @@
 date_default_timezone_set('America/Sao_Paulo');
 
 /* Inicia a sessão */
-//session_start(); 
-//require 'init.php';
-require 'funcoes/conexao.php';
+session_start(); 
+require_once './funcoes/init.php';
+require_once './funcoes/conexao.php';
 //include 'menunavbar.php';/
-//session_checker();
+session_checker();
 //include 'menumenu.php'; 
-//$log=isLoggedIn();
+$log=isLoggedIn();
 
 ?>
 <!DOCTYPE html>
@@ -31,18 +31,13 @@ require 'funcoes/conexao.php';
     </head>
 
 <body>
-    <?php //$log=isLoggedIn(); 
-    //if ($log=='1'):
+    <?php $log=isLoggedIn(); 
+    if ($log=='1'):
 
-    include 'funcoes/mainheader.php';
-    ?>
+        include 'funcoes/mainheader.php';
+        include 'funcoes/footer.php'; 
+    endif;
 
-
-    <?php //endif; 
-    //include 'footer.php'; 
-    ?>
-
-    <?php //include 'funcoes/footer.php'; 
     ?>
     <script type="text/javascript" src="js/custom.js"></script>
 </body>

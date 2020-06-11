@@ -1,14 +1,13 @@
 <header>
-  <!-- Modal -->
+  <!-- Insert Modal -->
   <div class="modal fade" id="insertuser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <h6 class="modal-title text-white" id="exampleModalLabel">Adicionar Usuários</h6>
         </div>
-        <form action="insertuser.php" method="POST">
+        <form action="updateuser.php" method="POST">
           <div class="modal-body">
-
             <div class="form-group row">
               <label for="nome" class="col-sm-3 col-form-label">Nome</label>
               <div class="col-sm-9">
@@ -43,7 +42,6 @@
                 </select>
               </div>
             </div>
-
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -53,7 +51,6 @@
       </div>
     </div>
   </div>
-
   <!-- Update Modal -->
   <div class="modal fade" id="editmodaluser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -123,10 +120,97 @@
       </div>
     </div>
   </div>
-
+<!-- Delete Modal -->
+<div class="modal fade" id="deletemodaluser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-danger">
+          <h6 class="modal-title text-white" id="exampleModalLabel">Apagar Usuário</h6>
+        </div>
+        <form action="updateuser.php" method="POST">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="id" class="col-sm-3 col-form-label">Id Usuário</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="diduser" name="diduser" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="nome" class="col-sm-3 col-form-label">Nome</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="dnome" name="dnome" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email" class="col-sm-3 col-form-label">E-mail</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" id="demail" name="demail" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="login" class="col-sm-3 col-form-label">Login</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="dlogin" name="dlogin" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Voltar</button>
+            <input type="submit" name="deleteuser" class="btn btn-success" value="Confirmar!"></input>
+            <!--<button type="submit" name="insertuser" class="btn btn-success">Salvar</button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--END Delete Modal -->
+  <!-- reset Modal -->
+<div class="modal fade" id="resetmodaluser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:purple;">
+          <h6 class="modal-title text-white" id="exampleModalLabel">Zerar Senha do Usuário</h6>
+        </div>
+        <form action="updateuser.php" method="POST">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="id" class="col-sm-3 col-form-label">Id Usuário</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="ziduser" name="ziduser" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="nome" class="col-sm-3 col-form-label">Nome</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="znome" name="znome" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email" class="col-sm-3 col-form-label">E-mail</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" id="zemail" name="zemail" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="login" class="col-sm-3 col-form-label">Login</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="zlogin" name="zlogin" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Voltar</button>
+            <input type="submit" name="resetuser" class="btn btn-warning" value="Zerar Senha deste Usuário!"></input>
+            <!--<button type="submit" name="insertuser" class="btn btn-success">Salvar</button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--END reset Modal -->
   <!--NAV BAR -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <a class="navbar-brand" href="#"><img src="./img/start.png" width="40" height="40"></a>
+    <a class="navbar-brand" href="#"><img src="./img/start.png" width="30" height="30"></a>
     <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
@@ -139,10 +223,10 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Usuários
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a type="button" class="nav-link text-light bg-primary" data-toggle="modal" data-target="#insertuser">Adicionar Usuário</a>
+          <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
+            <a type="button" class="nav-link text-light" data-toggle="modal" data-target="#insertuser">Adicionar Usuário</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Algo mais aqui</a>
+            <!--<a class="dropdown-item" href="#">Algo mais aqui</a> -->
           </div>
         </li>
         <li class="nav-item active">

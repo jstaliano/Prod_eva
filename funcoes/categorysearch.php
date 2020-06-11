@@ -1,8 +1,10 @@
 <?php
-//session_start(); 
-//require_once 'init.php';
-//session_checker();
-//$log=isLoggedIn();
+session_start(); 
+require_once 'init.php';
+session_checker();
+$log=isLoggedIn();
+
+if ($log=='1'): 
     $parametro = isset($_POST['pesquisaCliente']) ? $_POST['pesquisaCliente'] : null;
     
 
@@ -37,7 +39,7 @@
                                     $msg .='<td >'.$category->CategoryDescription.'</td>';
                                     $msg .='<td >'.$category->CreatedDate.'</td>';                                    
                                     if (true):
-                                        $msg .='<td><button type="button" id="editbtncat" class="btn btn danger editbtncat"><i class="fas fa-edit" style="font-size: 40px; color:   Dodgerblue;"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#?'.$category->CategoryId.'"><i class="fas fa-trash" style="font-size: 20px; color: red;  "></i></a></td>';       
+                                        $msg .='<td><button type="button" id="editbtncat" class="btn btn danger editbtncat"><i class="fas fa-edit" style="font-size: 30px; color:   Dodgerblue;"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="deletebtncat" class="btn btn danger deletebtncat"><i class="fas fa-trash" style="font-size: 30px;color:red;"></i></button></td>';       
                                     else:
                                         $msg .='<td><i class="fas fa-ban" style="font-size: 20px; color:red;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-banh" style="font-size: 20px; color: red;"></i></td>';       
                                     endif;
@@ -49,28 +51,38 @@
                             $msg .="Nenhum Produto foi encontrado...";
                         endif;        
     echo $msg;    
+endif;
 ?>
 
 <script >
   $(document).ready(function (){
     $('.editbtncat').on('click',function () {        
-        $('#editmodalcat').modal('show') 
-        
-        $tr = $(this).closest('tr')
-        
+        $('#editmodalcat').modal('show')         
+        $tr = $(this).closest('tr')        
         var data = $tr.children("td").map(function() {
             return $(this).text()
         }).get();
-        console.log(data);
-
-        
+        console.log(data);        
         $('#uidcat').val(data[0])
         $('#unomecat').val(data[1])
         $('#udescricaocat').val(data[2])        
-        $('#udatacat').val(data[3])        
-        
-
+        $('#udatacat').val(data[3])
     });
 });
-
+</script>
+<script >
+  $(document).ready(function (){
+    $('.deletebtncat').on('click',function () {        
+        $('#deletemodalcat').modal('show')         
+        $tr = $(this).closest('tr')        
+        var data = $tr.children("td").map(function() {
+            return $(this).text()
+        }).get();
+        console.log(data);        
+        $('#didcat').val(data[0])
+        $('#dnomecat').val(data[1])
+        $('#ddescricaocat').val(data[2])        
+        $('#ddatacat').val(data[3])
+    });
+});
 </script>
