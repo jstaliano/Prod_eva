@@ -24,7 +24,6 @@
     $password1 = isset($_POST['password1']) ? $_POST['password1'] : '';
     $password2 = isset($_POST['password2']) ? $_POST['password2'] : '';
     $mudandodesenha= isset($_POST['novasenha']) ? $_POST['novasenha'] : '';
-
     if (!empty($mudandodesenha)) :
         if ($password1 <> $password2) :
             echo "<div class='alert alert-success text-center' role='alert'><h3>Novas Senhas não são iguais!!!</h3></div> ";
@@ -32,17 +31,12 @@
             exit;
         endif;
     endif;
-
     if (empty($usuario) || empty($password)) {
         echo "<div class='alert alert-danger text-center' role='alert'><h3>Informe o Usuário e ou a Senha ... </h3></div> ";
         echo "<meta http-equiv=refresh content='3;URL=../sign-in.html'>";
         exit;
-    }
-
-    
+    }    
     $passwordHash = make_hash($password);
-    
-    
     $conexao = conexao::getInstance();
     $sql = "SELECT UserId,UserName,UserEmail,UserLogin,UserNivel,LastLoginDate,LastLoginHour,UserPassword,UserAccess,UserSet FROM users WHERE UserLogin=:usuario AND UserPassword = :senha ";
     $stm = $conexao->prepare($sql);
