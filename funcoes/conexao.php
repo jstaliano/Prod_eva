@@ -1,33 +1,17 @@
 <?php
- 
 define('SGBD', 'mysql');
-define('HOST', '127.0.0.1');
+define('HOST', 'localhost');
 define('DBNAME', 'db_eog');
 define('CHARSET', 'utf8');
 define('USER', 'root');
 define('PASSWORD', '');
 define('SERVER', 'local');
 
-class conexao {
-    
-    /*
-     * Atributo estático de conexão
-     */
+class conexao {    
     private static $pdo;
-
-    /*
-     * Escondendo o construtor da classe
-     */
-    private function __construct() {
-        //
+    private function __construct() {        
     }
-
-    /*
-     * Método privado para verificar se a extensão PDO do banco de dados escolhido
-     * está habilitada
-     */
     private static function verificaExtensao() {
-
         switch(SGBD):
             case 'mysql':
                 $extensao = 'pdo_mysql';
@@ -44,21 +28,13 @@ class conexao {
                 $extensao = 'pdo_pgsql';
                 break;
         endswitch;
-
         if(!extension_loaded($extensao)):
             echo "<h1>Extensão {$extensao} não habilitada!</h1>";
             exit();
         endif;
     }
-
-    /*
-     * Método estático para retornar uma conexão válida
-     * Verifica se já existe uma instância da conexão, caso não, configura uma nova conexão
-     */
     public static function getInstance() {
-
         self::verificaExtensao();
-
         if (!isset(self::$pdo)) {
             try {
                 $opcoes = array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8');
@@ -82,23 +58,14 @@ class conexao {
             } catch (PDOException $e) {
                 print "Erro: " . $e->getMessage();
             }
-        }
-        
+        }        
         return self::$pdo;
     }
-
-    public static function isConectado(){
-        
-        
+    public static function isConectado(){        
         if(self::$pdo):
-
             return true;
         else:
             return false;
         endif;
     }
-
 }
-
-
-

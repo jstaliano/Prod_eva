@@ -53,7 +53,8 @@ if ($log=='1'):
                             $msg .='</table>';
                         else:
                             $msg = "";
-                            $msg .="Nenhum Usuário foi encontrado...";
+                            echo "<div class='alert alert-warning text-center' style='margin-top:25px;' role='alert'><h4>Nenhum Usuário Encontrado Com Esse Nome!</h4> </div> ";
+                            //$msg .="Nenhum Usuário foi encontrado...";
                         endif;        
     echo $msg;    
 endif;

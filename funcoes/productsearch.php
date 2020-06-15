@@ -21,7 +21,7 @@ if ($log=='1'):
                         if (empty($parametro)):    
                             $sql = "SELECT ProductId,ProductCode,ProductNCM,ProductName,ProductImage,ProductCategoryId FROM products ORDER BY ProductCategoryId DESC";  
                         else:                             
-                            $sql = "SELECT ProductId,ProductCode,ProductNCM,ProductName,ProductImage,ProductCategoryId FROM products WHERE ProductName LIKE '%$parametro%'";
+                            $sql = 'SELECT ProductId,ProductCode,ProductNCM,ProductName,ProductImage,ProductCategoryId FROM products WHERE ProductName LIKE "%$parametro%"';
                         endif;
                         $stm = $conexao->prepare($sql);                        
                         $stm->execute();
@@ -48,7 +48,8 @@ if ($log=='1'):
                             $msg .='        </table>';
                         else:
                             $msg = "";
-                            $msg .="Nenhum Produto foi encontrado...";
+                            echo "<div class='alert alert-warning text-center' style='margin-top:25px;' role='alert'><h4>Nenhum Produto Encontrado Com Essa Descrição!</h4> </div> ";
+                            //$msg .="Nenhum Produto foi encontrado...";
                         endif;        
     echo $msg;
 endif; 

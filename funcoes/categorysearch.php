@@ -48,7 +48,8 @@ if ($log=='1'):
                             $msg .='        </table>';
                         else:
                             $msg = "";
-                            $msg .="Nenhum Produto foi encontrado...";
+                            echo "<div class='alert alert-warning text-center' style='margin-top:25px;' role='alert'><h4>Nenhuma Categoria Encontrada</h4> </div> ";
+                            //$msg .="Nenhum Produto foi encontrado...";
                         endif;        
     echo $msg;    
 endif;

@@ -169,7 +169,7 @@
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0" action="pesquisa.php" method="post" name="form_pesquisa" id="form_pesquisa">
-        <input class="form-control mr-sm-2" type='text' id="pesquisaCliente" name="pesquisaCliente" Placeholder="Nome do Produto">
+        <input class="form-control mr-sm-2" type='text' id="pesquisaCliente" name="pesquisaCliente" Placeholder="Descrição do Produto">
         <i class='fas fa-search' style='font-size: 28px; color: white;'></i>
       </form>
     </div>

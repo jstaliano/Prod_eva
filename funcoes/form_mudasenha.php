@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Tela de Login do Usuário para controle de Produtos">
+        <link rel="icon" href="../img/start.ico">
         <meta name="author" content="Julio Cesar Staliano">
         <title>Login - Área Restrita</title>        
         <link href="../css/bootstrap.css" rel="stylesheet">       

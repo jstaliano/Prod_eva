@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Tela de Login do Usuário para controle de Produtos">
+    <link rel="icon" href="img/start.ico">
     <meta name="Julio Cesar Staliano" content="Processar Login">
     <title>Login - Área Restrita</title>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
@@ -81,15 +82,17 @@
         $passwordHash1 = make_hash($password1);
         $qtdeacesso = ($user['UserAccess']);
         $qtdeacesso++;
+        $userSet =0;
         $ident = $user['UserId'];        
         $diahoje = date('Y-m-d');
         $horahoje = date('H:i:s');        
-        $sql = 'UPDATE users SET  UserPassword=:pass, LastLoginDate=:diahoje, LastLoginHour=:horahoje, UserAccess=:qtdeacesso WHERE UserId =:id';
+        $sql = 'UPDATE users SET  UserPassword=:pass, LastLoginDate=:diahoje, LastLoginHour=:horahoje, UserAccess=:qtdeacesso, UserSet=:userset WHERE UserId =:id';
         $stmt = $conexao->prepare($sql);
         $stmt->bindValue(':id', $ident);
         $stmt->bindValue(':diahoje', $diahoje);
         $stmt->bindValue(':horahoje', $horahoje);
         $stmt->bindValue(':qtdeacesso', $qtdeacesso);
+        $stmt->bindValue(':userset', $userSet);
         $stmt->bindValue(':pass', $passwordHash1);        
         $stmt->execute();
         session_start();
