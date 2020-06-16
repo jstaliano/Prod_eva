@@ -1,3 +1,12 @@
+<?php
+//require 'conexao.php';
+$conexao = conexao::getInstance();
+$sql = "SELECT CategoryId, CategoryName FROM categories ORDER BY CategoryName ASC";  
+$stm = $conexao->prepare($sql);                        
+$stm->execute();
+$categories = $stm->fetchAll(PDO::FETCH_OBJ);  
+?>
+
 <header>
   <!-- Insert Modal -->
   <div class="modal fade" id="insertproduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -29,7 +38,12 @@
             <div class="form-group row">
               <label for="categoria" class="col-sm-3 col-form-label">Categoria</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Categoria">
+                <select type="text" class="form-control" id="categoria" name="categoria" placeholder="Categoria">
+                    <?php foreach ($categories as $category) {
+                      echo '<option value="'.$category->CategoryId.'">'.$category->CategoryName.'</option>';
+                    }  ?>
+              
+                </select>
               </div>
             </div>
             <div class="form-group row">
@@ -79,7 +93,11 @@
             <div class="form-group row">
               <label for="categoria" class="col-sm-3 col-form-label">Categoria</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="ucategoria" name="ucategoria" placeholder="Categoria">
+                <select type="text" class="form-control" id="ucategoria" name="ucategoria" placeholder="Categoria">
+                    <?php foreach ($categories as $category) {
+                      echo '<option value="'.$category->CategoryId.'">'.$category->CategoryName.'</option>';
+                    }  ?>
+                </select>
               </div>
             </div>
             <div class="form-group row">

@@ -4,6 +4,12 @@ require_once 'init.php';
 session_checker();
 $log=isLoggedIn();
 if ($log=='1'): 
+
+    require 'conexao.php';
+    
+    
+
+
     $parametro = isset($_POST['pesquisaCliente']) ? $_POST['pesquisaCliente'] : null;
     $msg = '';   
     $msg .='            <table class="table table-sm table-striped table-hover" style="margin-top: 25px;">';
@@ -29,14 +35,24 @@ if ($log=='1'):
                         }catch (PDOException $e){
                             echo $e->getMessage();
                         }                          
-                        if(count($products)):                           
+                        if(count($products)):  
+                            clearstatcache();                         
                             foreach($products as $product):
-                                $msg .='</tr>';
+                                $idcat = $product->ProductCategoryId;
+                                $sql = "SELECT CategoryName FROM categories WHERE CategoryId = $idcat";  
+                                $stm = $conexao->prepare($sql);                        
+                                $stm->execute();
+                                $categories = $stm->fetchAll(PDO::FETCH_OBJ);  
+                                foreach ($categories as $category) {
+                                    $cat = $category->CategoryName;
+                                }
+                                    $msg .='</tr>';
                                     $msg .='<td style="display:none;" >'.$product->ProductImage.'</td>';
                                     $msg .='<td ><img src="./fotos/'.$product->ProductImage.'" width="180"></td>';
                                     $msg .='<td style="font-size:28px; align:Center; Color:#dc3545;" >'.$product->ProductCode.'</td>';
-                                    $msg .='<td >'.$product->ProductNCM.'</td>';
-                                    $msg .='<td >'.$product->ProductCategoryId.'</td>';
+                                    $msg .='<td >'.$product->ProductNCM.'</td>';                                    
+                                    $msg .='<td style="display:none;">'.$product->ProductCategoryId.'</td>';
+                                    $msg .='<td >'.$cat.'</td>';
                                     $msg .='<td >'.$product->ProductName.'</td>';
                                     if ($_SESSION['nivel']==0):
                                         $msg .='<td><button type="button" id="editbtn" class="btn btn danger editbtn"><i class="fas fa-edit" style="font-size: 30px; color:   Dodgerblue;"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="editbtn" class="btn btn danger deletebtn"><i class="fas fa-trash" style="font-size:30px;color:red;"></i></button></td>';       
@@ -55,6 +71,9 @@ if ($log=='1'):
 endif; 
 ?> 
 <script >
+
+
+
   $(document).ready(function (){
     $('.editbtn').on('click',function () {        
         $('#editmodal').modal('show')         
@@ -62,10 +81,10 @@ endif;
         var data = $tr.children("td").map(function() {
             return $(this).text()
         }).get();
-        console.log(data);
+        //console.log(data);        
         $('#ucodigo').val(data[2])
         $('#uncm').val(data[3])
-        $('#unome').val(data[5])
+        $('#unome').val(data[6])        
         $('#ucategoria').val(data[4])
         $('#uimg').val(data[1])
         $('#ufoto').val(data[0])        

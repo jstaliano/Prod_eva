@@ -76,7 +76,7 @@
         $_SESSION['usuario'] = $user['UserLogin'];
         $_SESSION['tempo'] = date('H:i:s');
         $_SESSION['logado_desde'] = date('H:i:s');        
-        echo "<div class='alert alert-success text-center' role='alert'><h3>Autencticado. Aguarde... </h3></div> ";
+        echo "<div class='alert alert-success text-center' role='alert'><h3>Autenticado. Aguarde... </h3></div> ";
         echo "<meta http-equiv=refresh content='1;URL=../index.php'>";
     elseif ($mudandodesenha = "mudasenha") :
         $passwordHash1 = make_hash($password1);

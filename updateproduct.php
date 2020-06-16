@@ -22,25 +22,36 @@ $conexao = conexao::getInstance();
 $log=isLoggedIn(); 
 if ($log=='1'):
     if(isset($_POST['updateproduct'])):
+        
         $codigo     = $_POST['ucodigo'];    
         $ncm        = $_POST['uncm'];
         $nome       = $_POST['unome'];
         $categoria  = $_POST['ucategoria'];
         $img        = $_POST['ufoto'];    
-        $foto       = (isset($_FILES['uimg'])) ? $_FILES['uimg'] : '';    
-        $extensao = strtolower(substr($_FILES['uimg']['name'], -4));   
+        $foto       = (isset($_FILES['uimg']['name'])) ? $_FILES['uimg']['name'] : '';    
+        $extensao = strtolower(substr($_FILES['uimg']['name'], -4)); 
+       // $extensao = strtolower(substr($_FILES['img']['name'], -4));
+        $novo_nome1 = Date('Y-m-d').'_'.uniqid().$extensao;   
         $diretorio = './fotos/';    
-        $sql = 'UPDATE products SET ProductCode=:code,ProductNCM=:ncm,ProductName=:nome,ProductImage=:img,ProductCategoryId=:categoria WHERE ProductCode =:code';			
-    	$stm = $conexao->prepare($sql);			
-    	$stm->bindValue(':code', $codigo);
-    	$stm->bindValue(':ncm', $ncm);
-    	$stm->bindValue(':nome', $nome);
-    	$stm->bindValue(':img', $img);	
-    	$stm->bindValue(':categoria', $categoria);    
-        $retorno = $stm->execute();
-        if (isset($_FILES['uimg'])):
-            move_uploaded_file($_FILES['uimg']['tmp_name'], $diretorio.$img);       
+        if ($_FILES['uimg']['error']<>4):            
+            move_uploaded_file($_FILES['uimg']['tmp_name'], $diretorio.$novo_nome1);       
+            $sql = 'UPDATE products SET ProductCode=:code,ProductNCM=:ncm,ProductName=:nome,ProductImage=:img,ProductCategoryId=:categoria WHERE ProductCode =:code';			
+    	    $stm = $conexao->prepare($sql);			
+    	    $stm->bindValue(':code', $codigo);
+    	    $stm->bindValue(':ncm', $ncm);
+    	    $stm->bindValue(':nome', $nome);    	
+    	    $stm->bindValue(':categoria', $categoria);        
+            $stm->bindValue(':img', $novo_nome1);	
+            unlink($diretorio.$img);   
+        else:            
+            $sql = 'UPDATE products SET ProductCode=:code,ProductNCM=:ncm,ProductName=:nome,ProductCategoryId=:categoria WHERE ProductCode =:code';			
+    	    $stm = $conexao->prepare($sql);			
+    	    $stm->bindValue(':code', $codigo);
+    	    $stm->bindValue(':ncm', $ncm);
+    	    $stm->bindValue(':nome', $nome);    	
+    	    $stm->bindValue(':categoria', $categoria);                    
         endif;
+        $retorno = $stm->execute();
         if($retorno):
             echo "<div class='alert alert-primary text-center' style='margin-top:25px;' role='alert'><h4>Cadastro Atualizado com sucesso !!!</h4> </div> ";
             echo "<meta http-equiv=refresh content='1;URL=productcontrol.php'>"; 
