@@ -37,7 +37,7 @@ if ($log=='1'):
                                     $msg .='<td >'.$category->CategoryId.'</td>';
                                     $msg .='<td >'.$category->CategoryName.'</td>';
                                     $msg .='<td >'.$category->CategoryDescription.'</td>';
-                                    $msg .='<td >'.$category->CreatedDate.'</td>';                                    
+                                    $msg .='<td >'.date("d/m/Y",strtotime($category->CreatedDate)).'</td>';                                    
                                     if (true):
                                         $msg .='<td><button type="button" id="editbtncat" class="btn btn danger editbtncat"><i class="fas fa-edit" style="font-size: 30px; color:   Dodgerblue;"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="deletebtncat" class="btn btn danger deletebtncat"><i class="fas fa-trash" style="font-size: 30px;color:red;"></i></button></td>';       
                                     else:

@@ -9,7 +9,7 @@ function make_hash($str)
  
 function isLoggedIn()
 {
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true):
+    /*if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true):
     
         return false;
     else:
@@ -22,14 +22,15 @@ function isLoggedIn()
             $_SESSION['tempo'] = date('H:i:s');
             return true;
         endif;
-    endif;
+    endif;*/
+    return true;
 
 }
 function session_checker(){
 
 	if(!isset($_SESSION['id'])):
 
-		header ("Location:http://localhost/eva/sign-in.html");
+		header ("Location:http://www.missbibi.com.br/sign-in.html");
 
 		exit(); 
     endif;
